@@ -77,12 +77,219 @@ namespace _4_in_a_Row_5x5_grid
         static int GetAIInput(int[][]Board)
         {
             // Can Win 
+            
+            //win on a horizontal line
             for(int i = 0; i < 5; i++)
             {
-                if (Simpleif(Board, "b-{0}", Convert.ToString(6), "b-{0}", Convert.ToString(8)))
+                if (Simpleif(Board, "b-{0}", Convert.ToString((i * 5) + 2), "b-{0}", Convert.ToString((i * 5) + 3), "b-{0}", Convert.ToString((i * 5) + 4), "{0}", Convert.ToString((i * 5) + 1)))
+                {
+                    return (i * 5) + 1;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString((i * 5) + 1), "b-{0}", Convert.ToString((i * 5) + 3), "b-{0}", Convert.ToString((i * 5) + 4), "{0}", Convert.ToString((i * 5) + 2)))
+                {
+                    return (i * 5) + 2;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString((i * 5) + 3), "b-{0}", Convert.ToString((i * 5) + 4), "b-{0}", Convert.ToString((i * 5) + 5), "{0}", Convert.ToString((i * 5) + 2)))
+                {
+                    return (i * 5) + 2;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString((i * 5) + 1), "b-{0}", Convert.ToString((i * 5) + 2), "b-{0}", Convert.ToString((i * 5) + 4), "{0}", Convert.ToString((i * 5) + 3)))
+                {
+                    return (i * 5) + 3;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString((i * 5) + 2), "b-{0}", Convert.ToString((i * 5) + 4), "b-{0}", Convert.ToString((i * 5) + 5), "{0}", Convert.ToString((i * 5) + 3)))
+                {
+                    return (i * 5) + 3;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString((i * 5) + 2), "b-{0}", Convert.ToString((i * 5) + 3), "b-{0}", Convert.ToString((i * 5) + 5), "{0}", Convert.ToString((i * 5) + 4)))
+                {
+                    return (i * 5) + 4;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString((i * 5) + 1), "b-{0}", Convert.ToString((i * 5) + 2), "b-{0}", Convert.ToString((i * 5) + 3), "{0}", Convert.ToString((i * 5) + 4)))
+                {
+                    return (i * 5) + 4;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString((i * 5) + 2), "b-{0}", Convert.ToString((i * 5) + 3), "b-{0}", Convert.ToString((i * 5) + 4), "{0}", Convert.ToString((i * 5) + 5)))
+                {
+                    return (i * 5) + 5;
+                }
+            }
+
+            //win on a vertical line
+            for (int i = 0; i < 5; i++)
+            {
+                if (Simpleif(Board, "b-{0}", Convert.ToString(i + 6), "b-{0}", Convert.ToString(i + 11), "b-{0}", Convert.ToString(i + 16), "{0}", Convert.ToString(i + 1)))
+                {
+                    return i + 1;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(i + 1), "b-{0}", Convert.ToString(i + 11), "b-{0}", Convert.ToString(i + 16), "{0}", Convert.ToString(i + 6)))
+                {
+                    return i + 6;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(i + 11), "b-{0}", Convert.ToString(i + 16), "b-{0}", Convert.ToString(i + 21), "{0}", Convert.ToString(i + 6)))
+                {
+                    return i + 6;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(i + 1), "b-{0}", Convert.ToString(i + 6), "b-{0}", Convert.ToString(i + 16), "{0}", Convert.ToString(i + 11)))
+                {
+                    return i + 11;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(i + 6), "b-{0}", Convert.ToString(i + 16), "b-{0}", Convert.ToString(i + 21), "{0}", Convert.ToString(i + 11)))
+                {
+                    return i + 11;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(i + 1), "b-{0}", Convert.ToString(i + 6), "b-{0}", Convert.ToString(i + 11), "{0}", Convert.ToString(i + 16)))
+                {
+                    return i + 16;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(i + 6), "b-{0}", Convert.ToString(i + 11), "b-{0}", Convert.ToString(i + 21), "{0}", Convert.ToString(i + 16)))
+                {
+                    return i + 16;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(i + 6), "b-{0}", Convert.ToString(i + 11), "b-{0}", Convert.ToString(i + 16), "{0}", Convert.ToString(i + 21)))
+                {
+                    return i + 21;
+                }
+            }
+
+            //win on a diagonal line from the bottom right
+            for(; ; )//just a container
+            {
+                if (Simpleif(Board, "b-{0}", Convert.ToString(12), "b-{0}", Convert.ToString(18), "b-{0}", Convert.ToString(24), "{0}", Convert.ToString(6)))
+                {
+                    return 6;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(6), "b-{0}", Convert.ToString(18), "b-{0}", Convert.ToString(24), "{0}", Convert.ToString(12)))
+                {
+                    return 12;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(6), "b-{0}", Convert.ToString(12), "b-{0}", Convert.ToString(24), "{0}", Convert.ToString(18)))
+                {
+                    return 18;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(6), "b-{0}", Convert.ToString(12), "b-{0}", Convert.ToString(18), "{0}", Convert.ToString(24)))
+                {
+                    return 24;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(8), "b-{0}", Convert.ToString(14), "b-{0}", Convert.ToString(20), "{0}", Convert.ToString(2)))
+                {
+                    return 2;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(2), "b-{0}", Convert.ToString(14), "b-{0}", Convert.ToString(20), "{0}", Convert.ToString(8)))
+                {
+                    return 8;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(2), "b-{0}", Convert.ToString(8), "b-{0}", Convert.ToString(20), "{0}", Convert.ToString(14)))
+                {
+                    return 14;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(2), "b-{0}", Convert.ToString(8), "b-{0}", Convert.ToString(14), "{0}", Convert.ToString(20)))
+                {
+                    return 20;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(7), "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(19), "{0}", Convert.ToString(1)))
                 {
                     return 1;
                 }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(1), "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(19), "{0}", Convert.ToString(7)))
+                {
+                    return 7;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(19), "b-{0}", Convert.ToString(25), "{0}", Convert.ToString(7)))
+                {
+                    return 7;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(1), "b-{0}", Convert.ToString(7), "b-{0}", Convert.ToString(19), "{0}", Convert.ToString(13)))
+                {
+                    return 13;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(7), "b-{0}", Convert.ToString(19), "b-{0}", Convert.ToString(25), "{0}", Convert.ToString(13)))
+                {
+                    return 13;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(1), "b-{0}", Convert.ToString(7), "b-{0}", Convert.ToString(13), "{0}", Convert.ToString(19)))
+                {
+                    return 19;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(7), "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(25), "{0}", Convert.ToString(19)))
+                {
+                    return 19;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(7), "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(19), "{0}", Convert.ToString(25)))
+                {
+                    return 25;
+                }
+                break;
+            }
+
+            //win on a diagonal line from the bottom left
+            for(; ; )
+            {
+                if (Simpleif(Board, "b-{0}", Convert.ToString(14), "b-{0}", Convert.ToString(18), "b-{0}", Convert.ToString(22), "{0}", Convert.ToString(10)))
+                {
+                    return 10;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(10), "b-{0}", Convert.ToString(18), "b-{0}", Convert.ToString(22), "{0}", Convert.ToString(14)))
+                {
+                    return 14;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(10), "b-{0}", Convert.ToString(14), "b-{0}", Convert.ToString(22), "{0}", Convert.ToString(18)))
+                {
+                    return 18;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(10), "b-{0}", Convert.ToString(14), "b-{0}", Convert.ToString(18), "{0}", Convert.ToString(22)))
+                {
+                    return 22;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(8), "b-{0}", Convert.ToString(12), "b-{0}", Convert.ToString(16), "{0}", Convert.ToString(4)))
+                {
+                    return 4;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(4), "b-{0}", Convert.ToString(12), "b-{0}", Convert.ToString(16), "{0}", Convert.ToString(8)))
+                {
+                    return 8;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(4), "b-{0}", Convert.ToString(8), "b-{0}", Convert.ToString(16), "{0}", Convert.ToString(12)))
+                {
+                    return 12;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(4), "b-{0}", Convert.ToString(8), "b-{0}", Convert.ToString(12), "{0}", Convert.ToString(16)))
+                {
+                    return 16;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(9), "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(17), "{0}", Convert.ToString(5)))
+                {
+                    return 5;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(5), "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(17), "{0}", Convert.ToString(9)))
+                {
+                    return 9;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(17), "b-{0}", Convert.ToString(21), "{0}", Convert.ToString(9)))
+                {
+                    return 9;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(5), "b-{0}", Convert.ToString(9), "b-{0}", Convert.ToString(17), "{0}", Convert.ToString(13)))
+                {
+                    return 13;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(17), "b-{0}", Convert.ToString(21), "{0}", Convert.ToString(13)))
+                {
+                    return 13;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(5), "b-{0}", Convert.ToString(9), "b-{0}", Convert.ToString(13), "{0}", Convert.ToString(17)))
+                {
+                    return 17;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(9), "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(21), "{0}", Convert.ToString(17)))
+                {
+                    return 17;
+                }
+                if (Simpleif(Board, "b-{0}", Convert.ToString(9), "b-{0}", Convert.ToString(13), "b-{0}", Convert.ToString(17), "{0}", Convert.ToString(21)))
+                {
+                    return 21;
+                }
+                break;
             }
 
             return 0;
