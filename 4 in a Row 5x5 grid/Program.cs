@@ -7,20 +7,88 @@ namespace _4_in_a_Row_5x5_grid
         static void Main(string[] args)
         {
             // The Board 5x5 with 0 as Empty , 1 as User, 2 as AI
-            int[][] board = new int[5][];
-            board[0] = new int[5] { 0, 0, 0, 0, 0 };
-            board[1] = new int[5] { 0, 0, 0, 0, 0 };
-            board[2] = new int[5] { 0, 0, 0, 0, 0 };
-            board[3] = new int[5] { 0, 0, 0, 0, 0 };
-            board[4] = new int[5] { 0, 0, 0, 0, 0 };
+            int[][] Board = new int[5][];
+            Board[0] = new int[5] { 1, 1, 0, 0, 0 };
+            Board[1] = new int[5] { 2, 0, 2, 0, 0 };
+            Board[2] = new int[5] { 0, 0, 0, 0, 0 };
+            Board[3] = new int[5] { 0, 0, 0, 0, 0 };
+            Board[4] = new int[5] { 0, 0, 0, 0, 0 };
 
-                      
+            int UserInput, AIInput;
+            // this int will keep changing to the newest input
+
+
+            Console.WriteLine(GetAIInput(Board));
+
+
+
+            if (Playerfirst())
+            {
+                // User First
+                UserInput = GetUserInput(Board);
+            }
+            else
+            {
+                // AI first
+
+            }
 
             
 
         }
+        static bool Playerfirst()
+        {
+            Random rng = new Random();
+            if (rng.Next(2) == 1)
+            {
+                return true;
+            } else { return false; }
+        }
+        static int GetUserInput(int[][]Board)
+        {
+            for(; ; )
+            {
+                try
+                {
+                    int x = Convert.ToInt32(Console.ReadLine());
+                    if(x<=25 && x >= 1)
+                    {
+                        if (Simpleif(Board, "{0}", Convert.ToString(x)))
+                        {
+                            return x;
+                        }
+                        else
+                        {
+                            Console.WriteLine("EROR");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("EROR");
+                    }
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine("EROR");
+                }
+            }
+        }
 
-        static bool CheckWin(int[][] Board,int turn, bool playerfirst)
+        static int GetAIInput(int[][]Board)
+        {
+            // Can Win 
+            for(int i = 0; i < 5; i++)
+            {
+                if (Simpleif(Board, "b-{0}", Convert.ToString(6), "b-{0}", Convert.ToString(8)))
+                {
+                    return 1;
+                }
+            }
+
+            return 0;
+        }
+
+        static bool CheckWin(int[][] Board, int turn, bool playerfirst)
         {
             // y = a if user ,y = b if AI
             string y;
@@ -48,13 +116,13 @@ namespace _4_in_a_Row_5x5_grid
             }
 
             // if win on a horizontal line
-            for (int x =0 ;x<5 ;x++ )
+            for (int x = 0; x < 5; x++)
             {
-                if (Simpleif(Board, "{0}{1}",y, Convert.ToString((x * 5) + 1), "{0}{1}", y, Convert.ToString((x * 5) + 2), "{0}{1}", y, Convert.ToString((x * 5) + 3), "{0}{1}", y, Convert.ToString((x * 5) + 4)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString((x * 5) + 1), "{0}-{1}", y, Convert.ToString((x * 5) + 2), "{0}-{1}", y, Convert.ToString((x * 5) + 3), "{0}-{1}", y, Convert.ToString((x * 5) + 4)))
                 {
                     return true;
                 }
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString((x * 5) + 2), "{0}{1}", y, Convert.ToString((x * 5) + 3), "{0}{1}", y, Convert.ToString((x * 5) + 4), "{0}{1}", y, Convert.ToString((x * 5) + 5)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString((x * 5) + 2), "{0}-{1}", y, Convert.ToString((x * 5) + 3), "{0}-{1}", y, Convert.ToString((x * 5) + 4), "{0}-{1}", y, Convert.ToString((x * 5) + 5)))
                 {
                     return true;
                 }
@@ -63,11 +131,11 @@ namespace _4_in_a_Row_5x5_grid
             // if win on a vertical line
             for (int x = 0; x < 5; x++)
             {
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(x+1), "{0}{1}", y, Convert.ToString(x+6), "{0}{1}", y, Convert.ToString(x+11), "{0}{1}", y, Convert.ToString(x+16)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(x + 1), "{0}-{1}", y, Convert.ToString(x + 6), "{0}-{1}", y, Convert.ToString(x + 11), "{0}-{1}", y, Convert.ToString(x + 16)))
                 {
                     return true;
                 }
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(x + 6), "{0}{1}", y, Convert.ToString(x + 11), "{0}{1}", y, Convert.ToString(x + 16), "{0}{1}", y, Convert.ToString(x + 21)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(x + 6), "{0}-{1}", y, Convert.ToString(x + 11), "{0}-{1}", y, Convert.ToString(x + 16), "{0}-{1}", y, Convert.ToString(x + 21)))
                 {
                     return true;
                 }
@@ -76,19 +144,19 @@ namespace _4_in_a_Row_5x5_grid
             // if win on a diagonal line to the bottom right
             for (; ; ) // just a container
             {
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(1), "{0}{1}", y, Convert.ToString(7), "{0}{1}", y, Convert.ToString(14), "{0}{1}", y, Convert.ToString(19)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(1), "{0}-{1}", y, Convert.ToString(7), "{0}-{1}", y, Convert.ToString(14), "{0}-{1}", y, Convert.ToString(19)))
                 {
                     return true;
                 }
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(7), "{0}{1}", y, Convert.ToString(13), "{0}{1}", y, Convert.ToString(19), "{0}{1}", y, Convert.ToString(25)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(7), "{0}-{1}", y, Convert.ToString(13), "{0}-{1}", y, Convert.ToString(19), "{0}-{1}", y, Convert.ToString(25)))
                 {
                     return true;
                 }
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(6), "{0}{1}", y, Convert.ToString(12), "{0}{1}", y, Convert.ToString(18), "{0}{1}", y, Convert.ToString(24)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(6), "{0}-{1}", y, Convert.ToString(12), "{0}-{1}", y, Convert.ToString(18), "{0}-{1}", y, Convert.ToString(24)))
                 {
                     return true;
                 }
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(2), "{0}{1}", y, Convert.ToString(8), "{0}{1}", y, Convert.ToString(14), "{0}{1}", y, Convert.ToString(20)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(2), "{0}-{1}", y, Convert.ToString(8), "{0}-{1}", y, Convert.ToString(14), "{0}-{1}", y, Convert.ToString(20)))
                 {
                     return true;
                 }
@@ -98,19 +166,19 @@ namespace _4_in_a_Row_5x5_grid
             // if win on a diagonal line from the bottom left
             for (; ; ) // just a container
             {
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(5), "{0}{1}", y, Convert.ToString(9), "{0}{1}", y, Convert.ToString(13), "{0}{1}", y, Convert.ToString(17)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(5), "{0}-{1}", y, Convert.ToString(9), "{0}-{1}", y, Convert.ToString(13), "{0}-{1}", y, Convert.ToString(17)))
                 {
                     return true;
                 }
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(9), "{0}{1}", y, Convert.ToString(13), "{0}{1}", y, Convert.ToString(17), "{0}{1}", y, Convert.ToString(21)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(9), "{0}-{1}", y, Convert.ToString(13), "{0}-{1}", y, Convert.ToString(17), "{0}-{1}", y, Convert.ToString(21)))
                 {
                     return true;
                 }
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(4), "{0}{1}", y, Convert.ToString(8), "{0}{1}", y, Convert.ToString(12), "{0}{1}", y, Convert.ToString(16)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(4), "{0}-{1}", y, Convert.ToString(8), "{0}-{1}", y, Convert.ToString(12), "{0}-{1}", y, Convert.ToString(16)))
                 {
                     return true;
                 }
-                if (Simpleif(Board, "{0}{1}", y, Convert.ToString(10), "{0}{1}", y, Convert.ToString(14), "{0}{1}", y, Convert.ToString(18), "{0}{1}", y, Convert.ToString(22)))
+                if (Simpleif(Board, "{0}-{1}", y, Convert.ToString(10), "{0}-{1}", y, Convert.ToString(14), "{0}-{1}", y, Convert.ToString(18), "{0}-{1}", y, Convert.ToString(22)))
                 {
                     return true;
                 }
@@ -122,11 +190,12 @@ namespace _4_in_a_Row_5x5_grid
         static bool Simpleif(int[][] Board, params string[] Condition)
         {
             bool isittrue = true;
-            foreach(string code in Condition)
+            foreach (string code in Condition)
             {
-                if (code.Contains('a')){
-                    code.Remove('a');
-                    if (Board[IPositionY(Convert.ToInt32(code))][IPositionX(Convert.ToInt32(code))] != 1)
+                if (code.Contains('a'))
+                {
+                    string[] splited = code.Split("-");
+                    if (Board[IPositionY(Convert.ToInt32(splited[1]))][IPositionX(Convert.ToInt32(splited[1]))] != 1)
                     {
                         isittrue = false;
                         break;
@@ -136,8 +205,8 @@ namespace _4_in_a_Row_5x5_grid
                 {
                     if (code.Contains('b'))
                     {
-                        code.Remove('b');
-                        if (Board[IPositionY(Convert.ToInt32(code))][IPositionX(Convert.ToInt32(code))] != 2)
+                        string[] splited = code.Split("-");
+                        if (Board[IPositionY(Convert.ToInt32(splited[1]))][IPositionX(Convert.ToInt32(splited[1]))] != 2)
                         {
                             isittrue = false;
                             break;
@@ -158,7 +227,7 @@ namespace _4_in_a_Row_5x5_grid
 
         static int IPositionY(int positioncode)
         {
-            if (positioncode < 6) { return 0; } 
+            if (positioncode < 6) { return 0; }
             else
             {
                 if (positioncode < 11) { return 1; }
@@ -177,7 +246,7 @@ namespace _4_in_a_Row_5x5_grid
             }
         }
 
-        static int IPositionX(int positioncode) 
+        static int IPositionX(int positioncode)
         {
             if (positioncode % 5 == 1) { return 0; }
             else
